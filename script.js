@@ -20,9 +20,14 @@ $(document).ready(function(){
     }
     else if(click === 1 ){
       imgNumber = $(this).attr("id");
-      checkForCurrentImage();
-      $("." + imgNumber).addClass("active2");
-      var timeoutID = window.setTimeout(checkForMatch, 300);
+      if($("." + imgNumber).hasClass("active") === false){
+        checkForCurrentImage();
+        $("." + imgNumber).addClass("active2");
+        var timeoutID = window.setTimeout(checkForMatch, 300);
+      }
+      else{
+        alert("You can't click twice!");
+      }
     }
   });
 
