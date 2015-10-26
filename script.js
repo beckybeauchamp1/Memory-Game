@@ -5,6 +5,7 @@ $(document).ready(function(){
   var saveImage = $("." + imgNumber);
   var imgClass;
   var image;
+  var pairs = 0;
 
   $("#start").on("click", function(){
     $(".square").css("display", "inline-block");
@@ -36,12 +37,14 @@ $(document).ready(function(){
   }
 
   function checkForMatch(){
+    var timeoutID2 = window.setTimeout(checkForWinner, 100);
       if($(".active").attr("src") === $(".active2").attr("src")){
         $(".active").parent().hide();
         $(".active2").parent().hide();
         $(".active").removeClass("active");
         $(".active2").removeClass("active2");
         click = 0;
+        pairs++;
       }
       else{
         $(".active").css("visibility", "hidden");
@@ -97,7 +100,14 @@ $(document).ready(function(){
       setAttributeForImage();
     }
   }
-
+  function checkForWinner(){
+    if (pairs === 6){
+      alert("You won the game!");
+    }
+    else{
+      console.log("You did not win!");
+    }
+  }
   function setAttributeForImage(){
     if($("." + imgClass).length < 2){
       $("." + imgNumber).attr("src", image);
