@@ -7,22 +7,62 @@ $(document).ready(function(){
   var image;
   var pairs = 0;
   var allClass = [];
+  var seconds = 60;
+  var timerClick = 0;
+  var timerID;
 
+  function startClock(){
+    if (timerClick === 0){
+        timerID = setInterval(function(){
+          if (seconds >= 0){
+            $(".scoreboard").html("Time Left: " + seconds);
+            seconds = seconds - 1;
+          }
+          else{
+            checkIfLose(checkForWinner);
+            clearTime();
+          }
+      },1000);
+    }
+  }
+
+  function checkIfLose(){
+    var winner = checkForWinner();
+    if (winner !== "winner"){
+      alert("YOU LOST!");
+      clearGame();
+    }
+  }
+
+function startTime(){
   $("#start").on("click", function(){
+    startClock();
     $(".square").css("display", "inline-block");
+    timerClick++;
   });
+}
 
-  $("#stop").on("click", function(){
-      console.log(allClass);
-      for(var i = 0; i < allClass.length; i++){
-        var currentClass = allClass[i];
-        console.log("i am looping " + i);
-        $(".square").children().attr("src", "");
-        $("." + currentClass).removeClass(currentClass);
-      }
-      $(".square").show();
-      $(".square").css("display", "none");
-  });
+function clearGame(){
+  $("#stop").on("click",resetAll);
+}
+
+function resetAll(){
+  for(var i = 0; i < allClass.length; i++){
+    var currentClass = allClass[i];
+    console.log("i am looping " + i);
+    $(".square").children().attr("src", "");
+    $("." + currentClass).removeClass(currentClass);
+  }
+  $(".square").show();
+  $(".square").css("display", "none");
+  clearTime();
+}
+function clearTime(){
+  clearInterval(timerID);
+  seconds = 60;
+  timerClick = 0;
+  $(".scoreboard").html("Time Left: " + seconds);
+}
 
   $(".square").on("click", function(){
     if (click === 0){
@@ -124,9 +164,12 @@ $(document).ready(function(){
   function checkForWinner(){
     if (pairs === 6){
       alert("You won the game!");
+      resetAll();
+      return "winner";
     }
     else{
       console.log("You did not win!");
+      return "loser";
     }
   }
   function setAttributeForImage(){
@@ -161,6 +204,9 @@ $(document).ready(function(){
       return "gargoyle";
     }
   }
+startTime();
+clearGame();
+
 });
 
 /*
