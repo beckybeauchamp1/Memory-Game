@@ -6,9 +6,22 @@ $(document).ready(function(){
   var imgClass;
   var image;
   var pairs = 0;
+  var allClass = [];
 
   $("#start").on("click", function(){
     $(".square").css("display", "inline-block");
+  });
+
+  $("#stop").on("click", function(){
+      console.log(allClass);
+      for(var i = 0; i < allClass.length; i++){
+        var currentClass = allClass[i];
+        console.log("i am looping " + i);
+        $(".square").children().attr("src", "");
+        $("." + currentClass).removeClass(currentClass);
+      }
+      $(".square").show();
+      $(".square").css("display", "none");
   });
 
   $(".square").on("click", function(){
@@ -17,13 +30,16 @@ $(document).ready(function(){
       imgNumber = $(this).attr("id");
       checkForCurrentImage();
       $("." + imgNumber).addClass("active");
+      allClass.push(imgClass);
     }
     else if(click === 1 ){
       imgNumber = $(this).attr("id");
       if($("." + imgNumber).hasClass("active") === false){
         checkForCurrentImage();
         $("." + imgNumber).addClass("active2");
+        allClass.push(imgClass);
         var timeoutID = window.setTimeout(checkForMatch, 300);
+
       }
       else{
         alert("You can't click twice!");
