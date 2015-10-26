@@ -166,6 +166,7 @@ function clearTime(){
       alert("You won the game!");
       resetAll();
       return "winner";
+
     }
     else{
       console.log("You did not win!");
