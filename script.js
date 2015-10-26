@@ -21,11 +21,7 @@ $(document).ready(function(){
       imgNumber = $(this).attr("id");
       checkForCurrentImage();
       $("." + imgNumber).addClass("active2");
-      click++;
-    }
-    else if (click === 2){
-      checkForMatch();
-      click = 0;
+      var timeoutID = window.setTimeout(checkForMatch, 300);
     }
   });
 
@@ -41,19 +37,18 @@ $(document).ready(function(){
 
   function checkForMatch(){
       if($(".active").attr("src") === $(".active2").attr("src")){
-        alert("IT'S A MATCH!!!");
         $(".active").parent().hide();
         $(".active2").parent().hide();
         $(".active").removeClass("active");
         $(".active2").removeClass("active2");
+        click = 0;
       }
       else{
-        alert("IT'S NOT A MATCH!!");
         $(".active").css("visibility", "hidden");
         $(".active2").css("visibility", "hidden");
         $(".active").removeClass("active");
         $(".active2").removeClass("active2");
-
+        click = 0;
       }
   }
 
