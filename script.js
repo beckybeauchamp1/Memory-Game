@@ -10,6 +10,10 @@ $(document).ready(function(){
   var allClass = [];
   var imageNames = ["boo", "witch", "creepy", "dude", "gargoyle", "zombie"];
 
+  function removeAltTags(){
+    $("img").removeAttr("alt");
+  }
+
   function enableButtons(){
     $("#stop").on("click",resetAll);
     $("#start").on("click", startGame);
@@ -160,6 +164,7 @@ function randomImage() {
   return randomImageName;
 }
 
+removeAltTags();
 enableButtons();
 
 });
