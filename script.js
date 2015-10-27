@@ -1,43 +1,44 @@
 $(document).ready(function(){
   var click = 0;
-  console.log(click);
   var imgNumber;
   var saveImage = $("." + imgNumber);
   var imgClass;
   var image;
   var pairs = 0;
   var allClass = [];
-  var seconds = 30;
+  var startingSeconds = 30;
+  var secondsRemaining = startingSeconds;
   var timerClick = 0;
   var timerID;
+  var imageNames = ["boo", "witch", "creepy", "dude", "gargoyle", "zombie"];
 
-function startClock(){
-  if (timerClick === 0){
-      timerID = setInterval(function(){
-        if (seconds >= 0){
-          $(".scoreboard").html("Time Left: " + seconds);
-          seconds = seconds - 1;
-        }
-        else{
-          checkIfLose(checkForWinner);
-          clearTime();
-        }
-    },1000);
+  function enableButtons(){
+    $("#stop").on("click",resetAll);
+    $("#start").on("click", startGame);
   }
-}
-function startTime(){
-  $("#start").on("click", function(){
+
+  function startClock(){
+    if (timerClick === 0){
+        timerID = setInterval(function(){
+          if (secondsRemaining >= 0){
+            $(".scoreboard").html("Time Left: " + secondsRemaining);
+            secondsRemaining = secondsRemaining - 1;
+          }
+          else{
+            checkIfLose();
+            clearTime();
+          }
+      },1000);
+    }
+  }
+
+  function startGame(){
     $("h1").html("Memory Game");
     $(".square").css("display", "inline-block");
     $(".square").css("visibility", "visible");
     startClock();
     timerClick++;
-  });
-}
-
-function clearGame(){
-  $("#stop").on("click",resetAll);
-}
+  }
 
 function resetAll(){
   for(var i = 0; i < allClass.length; i++){
@@ -46,14 +47,14 @@ function resetAll(){
     $(".square").children().attr("src", "");
     $("." + currentClass).removeClass(currentClass);
   }
-  $(".square").show();
+  $(".square").show(); // todo
   $(".square").css("display", "none");
   pairs = 0;
   clearTime();
 }
 function clearTime(){
   clearInterval(timerID);
-  seconds = 60;
+  secondsRemaining = startingSeconds;
   timerClick = 0;
   $(".scoreboard").html("Try Again?");
 }
@@ -92,24 +93,25 @@ function checkForCurrentImage(){
 }
 
 function checkForMatch(){
+  // why?
   var timeoutID2 = window.setTimeout(checkForWinner, 100);
-    if($(".active").attr("src") === $(".active2").attr("src")){
-      $(".active").parent().css("visibility", "hidden");
-      $(".active").css("visibility", "hidden");
-      $(".active2").parent().css("visibility", "hidden");
-      $(".active2").css("visibility", "hidden");
-      $(".active").removeClass("active");
-      $(".active2").removeClass("active2");
-      click = 0;
-      pairs++;
-    }
-    else{
-      $(".active").css("visibility", "hidden");
-      $(".active2").css("visibility", "hidden");
-      $(".active").removeClass("active");
-      $(".active2").removeClass("active2");
-      click = 0;
-    }
+  if($(".active").attr("src") === $(".active2").attr("src")){
+    $(".active").parent().css("visibility", "hidden");
+    $(".active").css("visibility", "hidden");
+    $(".active2").parent().css("visibility", "hidden");
+    $(".active2").css("visibility", "hidden");
+    $(".active").removeClass("active");
+    $(".active2").removeClass("active2");
+    click = 0;
+    pairs++;
+  }
+  else{
+    $(".active").css("visibility", "hidden");
+    $(".active2").css("visibility", "hidden");
+    $(".active").removeClass("active");
+    $(".active2").removeClass("active2");
+    click = 0;
+  }
 }
 
 function checkForWinner(){
@@ -136,48 +138,9 @@ function endingAnimation() {
 
 function assignImage(){
   var picture = randomImage();
-  if (picture === "boo"){
-    imgClass = "boo";
-    console.log(imgClass + "test!");
-    image = "images/boo.jpg";
-    // must have setAttributeForImage last!
-    setAttributeForImage();
-  }
-  else if(picture === "witch"){
-    imgClass = "witch";
-    console.log(imgClass + "test!");
-    image = "images/witch1.jpg";
-    // must have setAttributeForImage last!
-    setAttributeForImage();
-  }
-  else if(picture === "dude"){
-    imgClass = "dude";
-    console.log(imgClass + "test!");
-    image = "images/dude.jpg";
-    // must have setAttributeForImage last!
-    setAttributeForImage();
-  }
-  else if(picture === "zombie"){
-    imgClass = "zombie";
-    console.log(imgClass + "test!");
-    image = "images/zombie.jpg";
-    // must have setAttributeForImage last!
-    setAttributeForImage();
-  }
-  else if(picture === "creepy"){
-    imgClass = "creepy";
-    console.log(imgClass + "test!");
-    image = "images/creepy.jpg";
-    // must have setAttributeForImage last!
-    setAttributeForImage();
-  }
-  else if(picture === "gargoyle"){
-    imgClass = "gargoyle";
-    console.log(imgClass + "test!");
-    image = "images/gargoyle.jpg";
-    // must have setAttributeForImage last!
-    setAttributeForImage();
-  }
+  imgClass = picture;
+  image = "images/" + picture + ".jpg";
+  setAttributeForImage();
 }
 
 function setAttributeForImage(){
@@ -192,28 +155,12 @@ function setAttributeForImage(){
 }
 
 function randomImage() {
-  var randomNumber = Math.random();
-  if (randomNumber < 0.16) {
-      return "boo";
-  }
-  else if (randomNumber < 0.32) {
-      return "witch";
-  }
-  else if (randomNumber < 0.48){
-      return "dude";
-  }
-  else if (randomNumber < 0.64){
-      return "zombie";
-  }
-  else if(randomNumber < 0.8){
-    return "creepy";
-  }
-  else if(randomNumber < 1.0) {
-    return "gargoyle";
-  }
+  var randomIndex = Math.floor(Math.random() * imageNames.length);
+  var randomImageName = imageNames[randomIndex];
+  return randomImageName;
 }
-startTime();
-clearGame();
+
+enableButtons();
 
 });
 
