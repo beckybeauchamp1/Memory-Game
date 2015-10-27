@@ -38,6 +38,7 @@ function startTime(){
   $("#start").on("click", function(){
     startClock();
     $(".square").css("display", "inline-block");
+    $(".square").css("visibility", "visible");
     timerClick++;
   });
 }
@@ -55,6 +56,7 @@ function resetAll(){
   }
   $(".square").show();
   $(".square").css("display", "none");
+  pairs = 0;
   clearTime();
 }
 function clearTime(){
@@ -100,8 +102,10 @@ function clearTime(){
   function checkForMatch(){
     var timeoutID2 = window.setTimeout(checkForWinner, 100);
       if($(".active").attr("src") === $(".active2").attr("src")){
-        $(".active").parent().hide();
-        $(".active2").parent().hide();
+        $(".active").parent().css("visibility", "hidden");
+        $(".active").css("visibility", "hidden");
+        $(".active2").parent().css("visibility", "hidden");
+        $(".active2").css("visibility", "hidden");
         $(".active").removeClass("active");
         $(".active2").removeClass("active2");
         click = 0;
