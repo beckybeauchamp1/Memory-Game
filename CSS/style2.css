@@ -43,7 +43,7 @@ div.gameboard{
   position: relative;
 }
 div.square{
-  border: solid 6px orange;
+  border: solid 6px #181b25;
   background-color: black;
   width: 175px;
   height: 175px;
