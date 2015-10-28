@@ -77,6 +77,7 @@ $(document).ready(function(){
     }
     $(".square").css("display", "none");
     pairs = 0;
+    click = 0;
     clearTime();
   }
 
@@ -144,6 +145,8 @@ function checkForWinner(){
   if (pairs === 10){
     alert("You won the game!");
     resetAll();
+    $("h1").css("display", "none");
+    $("#nextlevel").css("display", "inline");
     return "winner";
   }
   else{
