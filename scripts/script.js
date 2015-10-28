@@ -71,6 +71,7 @@ $(document).ready(function(){
     }
     $(".square").css("display", "none");
     pairs = 0;
+    click = 0;
     clearTime();
   }
 

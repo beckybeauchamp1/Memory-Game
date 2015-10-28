@@ -8,8 +8,8 @@ $(document).ready(function(){
   var timerClick = 0;
   var timerID;
   var allClass = [];
-  var imageNames = ["bats", "boo", "castle", "cat2", "creepy", "dracula", "dude", "gargoyle", "house4", "house5",
-  "multipleimages", "nosferatu"];
+  var imageNames = ["bats", "boo", "castle", "cat2", "creepy", "dracula", "dude",
+  "gargoyle", "house4", "house5","multipleimages", "nosferatu"];
   var rulesCounter = 0;
 
   function removeAlt(){
@@ -28,14 +28,14 @@ $(document).ready(function(){
     evt.preventDefault();
     if(rulesCounter === 0){
       if($(".togglerules").css("display") === "none"){
-        $(".togglerules").slideToggle(1000);
+        $(".togglerules").slideToggle(500);
         $(".toggable").hide();
       }
       else{
-        $(".togglerules").slideToggle(1000);
+        $(".togglerules").slideToggle(500);
         var toggleBackTime = setTimeout(function(){
           $(".toggable").show();
-        }, 1500);
+        }, 1000);
       }
     }
   }
@@ -78,6 +78,7 @@ $(document).ready(function(){
     }
     $(".square").css("display", "none");
     pairs = 0;
+    click = 0;
     clearTime();
   }
 

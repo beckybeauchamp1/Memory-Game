@@ -7,7 +7,6 @@ $(document).ready(function(){
   var secondsRemaining = startingSeconds;
   var timerClick = 0;
   var timerID;
-  var allClass = [];
   var imageNames = ["cauldren", "confused", "deadman", "goblin", "grim", "hands", "hanging", "manic", "mask", "saw"];
   var rulesCounter = 0;
 
@@ -44,6 +43,15 @@ $(document).ready(function(){
     $("#start").on("click", startGame);
   }
 
+  function startGame(){
+    $("h1").html("Level Two");
+    $(".square").css("display", "inline-block");
+    $(".square").css("visibility", "visible");
+    startClock();
+    timerClick++;
+    rulesCounter++;
+  }
+
   function startClock(){
     if (timerClick === 0){
         timerID = setInterval(function(){
@@ -59,19 +67,9 @@ $(document).ready(function(){
     }
   }
 
-  function startGame(){
-    $("h1").html("Level Two");
-    $(".square").css("display", "inline-block");
-    $(".square").css("visibility", "visible");
-    startClock();
-    timerClick++;
-    rulesCounter++;
-  }
-
   function resetAll(){
-    for(var i = 0; i < allClass.length; i++){
-      var currentClass = allClass[i];
-      console.log("i am looping " + i);
+    for(var i = 0; i < imageNames.length; i++){
+      var currentClass = imageNames[i];
       $(".square").children().attr("src", "");
       $("." + currentClass).removeClass(currentClass);
     }
@@ -95,14 +93,12 @@ $(".square").on("click", function(){
     var self = this;
     checkForCurrentImage(self);
     $(self).children().addClass("active");
-    allClass.push(imgClass);
   }
   else if(click === 1 ){
     var self = this;
     if($(self).children().hasClass("active") === false){
       checkForCurrentImage(self);
       $(self).children().addClass("active2");
-      allClass.push(imgClass);
       var timeoutID = window.setTimeout(checkForMatch, 300);
     }
   }
