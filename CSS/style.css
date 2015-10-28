@@ -93,7 +93,7 @@ h2{
 }
 #rules{
   position: relative;
-  cursor:context-menu;
+  cursor: context-menu;
 }
 div.togglerules{
   background-color: rgba(0, 0, 0, 0.5);
