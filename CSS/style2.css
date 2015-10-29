@@ -4,7 +4,7 @@
 body{
   text-align: center;
   margin: 0 auto;
-  background-image: url("../images2/scene2.jpg");
+  background-image: url("../images/scene2.jpg");
   font-family: "Butcherman";
   font-size: 30px;
   color: #FF3300;
@@ -66,15 +66,15 @@ button:hover{
   background-color: lemonchiffon;
 }
 #nextlevel{
-  color: #FF3300;
-  font-size: 75px;
+  color: white;
+  font-size: 70px;
   display: none;
   text-decoration: none;
   text-shadow: 10px 5px 5px black;
   margin-top: 80px;
 }
 #nextlevel:hover{
-  color:#DAA520;
+  color:#FF3300;
 }
 img{
   width: 100%;

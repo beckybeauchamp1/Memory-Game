@@ -25,7 +25,7 @@ li a{
   text-decoration: none;
   color: #FF3300;
 }
-#level2{
+#level{
   display: none;
 }
 
@@ -68,17 +68,18 @@ button{
 }
 button:hover{
   background-color: lemonchiffon;
+  -webkit-transform: scale(1.2);
 }
 #nextlevel{
-  color: #FF3300;
-  font-size: 75px;
+  color: white;
+  font-size: 70px;
   display: none;
   text-decoration: none;
   text-shadow: 10px 5px 5px black;
   margin-top: 80px;
 }
 #nextlevel:hover{
-  color:#DAA520;
+  color:#FF3300;
 }
 img{
   width: 100%;
