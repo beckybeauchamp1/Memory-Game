@@ -3,15 +3,21 @@ MEMORY GAME!
 In the spirit of Halloween, it is your goal to collect all spooky image pairs before the timer runs out! If you win, you can advance to the next level. If you lose, you will have to play again.
 
 Goal:
+
 Find all the pairs before the time runs out.
 
 The player has a chance to turn over two images at a time, and if they match, they will disappear from the board.
 
+
 Winning:
+
 When all pairs have been found, the player wins and advances to the next level.
 
+
 Technologies:
+
 Javascript, Jquery, CSS3, HTML5
+
 
 User Stories:
 
